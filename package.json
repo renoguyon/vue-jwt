@@ -1,6 +1,6 @@
 {
   "name": "vuejs-jwt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Lightweight JWT library for Vue.js 2",
   "main": "./dist/vuejs-jwt.js",
   "scripts": {

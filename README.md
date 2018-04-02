@@ -52,7 +52,7 @@ const payload = Vue.$jwt.decode()
 
 ## Available options
 
-**signKey** (required) : Token signature key
+signKey (optional) : Token signature public key - to be provided only if you want to verify signature when decoding token
 
 storage (default: localStorage) : cookie | localStorage
 

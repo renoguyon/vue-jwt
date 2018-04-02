@@ -8,7 +8,7 @@
   const defaults = {
     storage: 'localStorage',
     keyName: 'auth_token',
-    signKey: '',
+    signKey: null,
     audience: null,
     issuer: null,
     ignoreExpiration: false,
@@ -48,17 +48,23 @@
       const secretOrKey = signKey ? signKey : this.options.signKey;
 
       try {
-        return jwt.verify(tokenToDecode, secretOrKey, {
+        const params = {
           audience: this.options.audience,
           issuer: this.options.issuer,
           ignoreExpiration: this.options.ignoreExpiration,
           ignoreNotBefore: this.options.ignoreNotBefore,
           subject: this.options.subject,
           clockTolerance: this.options.clockTolerance
-        });
+        };
+
+        if (secretOrKey === null) {
+          return jwt.decode(tokenToDecode, params);
+        }
+
+        return jwt.verify(tokenToDecode, secretOrKey, params);
       } catch (err) {
         console.error(`[Vue JWT] Can not decode token: ${err.message}`);
-        return null
+        return null;
       }
     }
   };
